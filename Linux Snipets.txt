@@ -1,0 +1,20 @@
+Find differences between 2 folders:
+	$find /dir1/ -type f -exec md5sum {} \; > dir1.txt
+	$find /dir2/ -type f -exec md5sum {} \; > dir2.txt
+	$diff dir1.txt dir2.txt
+
+	diff -rq dir1 dir2
+
+	Another good way to do the job is using git
+	git diff --no-index dir1/ dir2/
+	
+Mount a disk that is part of a RAID1
+	sudo -i
+	fdisk -l /dev/sdd
+	mkdir /mnt/old_hdd
+	mdadm --examine /dev/sdd4
+	mdadm -A -R /dev/md9 /dev/sdd4
+	mount -o ro /dev/md9 /mnt/old_hdd/
+	
+	umount /mnt/old_hdd 
+	mdadm -S /dev/md9
